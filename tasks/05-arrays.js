@@ -27,7 +27,11 @@ function flatten(arr) {
 //  zipIt(["Ana", "Amy", "Lisa"], ["Bob", "Josh", "Tim"])
 //    ➞ [["Ana", "Bob"], ["Amy", "Josh"],["Lisa", "Tim"]]
 function zipIt(womenArr, menArr) {
-  throw new Error('Not implemented');
+  let newArr = []
+  if (womenArr.length == menArr.length) {
+   newArr = womenArr.map((e, i) => [e, menArr[i]])
+  }
+  return newArr;
 }
 
 // Create a function that takes an array of items, removes all duplicate items and returns a new
@@ -37,7 +41,7 @@ function zipIt(womenArr, menArr) {
 //  removeDups(["The", "big", "cat"]) ➞ ["The", "big", "cat"]
 //  removeDups(["John", "Taylor", "John"]) ➞ ["John", "Taylor"]
 function removeDups(arr) {
-  throw new Error('Not implemented');
+  return arr.filter((value, index) => arr.indexOf(value) == index);
 }
 
 // Given an array containing an array containing an array containing... an array containing nothing.
