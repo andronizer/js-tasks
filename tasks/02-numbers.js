@@ -8,7 +8,7 @@
 // Notes
 //  ^ in the context of this challenge means "to the power of", also known as the "exponent" operator.
 function derivative(b, m) {
-  throw new Error('Not implemented');
+  return b*Math.pow(m, b-1)
 }
 
 // Create a function that validates whether a number n is within the bounds of lower and upper. Return false if n is not an integer.
@@ -22,9 +22,12 @@ function derivative(b, m) {
 //  The term "within bounds" means a number is considered equal or greater than a lower bound and lesser (but not equal) to an upper bound, (see example #2).
 //  Bounds will be always given as integers.
 function intWithinBounds(n, lower, upper) {
-  throw new Error('Not implemented');
+  if (Number.isInteger(n) && n >= lower && n < upper) {
+    return true 
+  } else {
+    return false
+  }
 }
-
 // Create a function that squares every digit of a number.
 //
 // Examples
@@ -35,7 +38,15 @@ function intWithinBounds(n, lower, upper) {
 // Notes
 // The function receives an integer and must return an integer.
 function squareDigits(n) {
-  throw new Error('Not implemented');
+  let newArr = [];
+  let arr = n.toString().split('');
+  for (i = 0; i < arr.length; i++) {
+    let res = arr[i]*arr[i]
+newArr.push(res)
+  }
+let number = newArr.join('');
+Number.parseInt(number)
+return number
 }
 
 // Write a program that takes a temperature input in celsius and converts it to Fahrenheit and Kelvin. Return the converted temperature values in an array.
@@ -55,9 +66,11 @@ function squareDigits(n) {
 //  Return calculated temperatures up to two decimal places.
 //  Return "Invalid" if K is less than 0.
 function tempConversion(celsius) {
-  throw new Error('Not implemented');
-}
+  const f = Math.round((celsius * 9 / 5 + 32) * 100) / 100;
+  const k = Math.round((celsius + 273.15) * 100) / 100;
 
+  return k < 0 ? "Invalid" : [f,k];
+}
 // Create a function that takes a number num and returns its double factorial.
 //
 // Examples
@@ -72,7 +85,11 @@ function tempConversion(celsius) {
 //  Try to solve it with recursion.
 //  Double factorial is not the same as factorial * 2.
 function doubleFactorial(num) {
-  throw new Error('Not implemented');
+  if (num <= 1 && num >= -1) {
+    return 1;
+  } else {
+    return num*doubleFactorial(num - 2)
+  }
 }
 
 // Count Ones in Binary Representation of Integer
@@ -85,9 +102,8 @@ function doubleFactorial(num) {
 
 // Notes
 //  The input will always be a valid integer (number).
-function countOnes(i) {
-  throw new Error('Not implemented');
-}
+
+countOnes = (i) => i.toString(2).split("0").join("").length;
 
 // Create a function that takes an integer n and reverses it.
 //
@@ -100,9 +116,10 @@ function countOnes(i) {
 //  This challenge is about using two operators that are related to division.
 //  If the number is negative, treat it like it's positive.
 function rev(n) {
-  throw new Error('Not implemented');
+  let res = parseInt(n.toString().split('').reverse().join('')) * Math.sign(n);
+  return Math.abs(res);
 }
-
+    
 // Given a two digit number, return true if that number contains one even and one odd digit.
 //
 // Examples
@@ -110,7 +127,19 @@ function rev(n) {
 //  oneOddOneEven(55) ➞ false
 //  oneOddOneEven(22) ➞ false
 function oneOddOneEven(n) {
-  throw new Error('Not implemented');
+  let arr = ('' + n).split('');
+  if (arr[0] % 2 == 0 && arr[1] % 2 !== 0) {
+    return true;
+  } 
+  if (arr[1] % 2 == 0 && arr[0] % 2 !== 0) {
+    return true;
+  }
+  if (arr[0] % 2 !== 0 && arr[1] % 2 !== 0) {
+    return false;
+  }
+  if (arr[0] % 2 == 0 && arr[1] % 2 == 0) {
+    return false;
+  }
 }
 
 // Given a number, n, return a function which adds n to the number passed to it.
@@ -123,9 +152,8 @@ function oneOddOneEven(n) {
 // Notes
 //  All numbers used in the tests will be integers (whole numbers).
 //  Returning a function from a function is a key part of understanding higher order functions (functions which operate on and return functions).
-function add(n) {
-  throw new Error('Not implemented');
-}
+
+var add = (n) => (m) => n + m;
 
 // Given two integers a and b, return how many times a can be halved while still being greater than b.
 //
@@ -137,8 +165,16 @@ function add(n) {
 // Notes
 //  Integer a will always be able to be halved at least once in every test case.
 function halveCount(a, b) {
-  throw new Error('Not implemented');
-}
+  let i = 0;
+  let halvedInt = a;
+  while (halvedInt > b) {
+    halvedInt = halvedInt / 2;
+    i++;
+    if (halvedInt < b) {
+      return i - 1;
+    }
+  }
+};
 
 module.exports = {
   derivative,
