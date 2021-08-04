@@ -73,8 +73,10 @@ function measureDepth(arr) {
 //  Don't count negative numbers.
 //  Floats and empty arrays will not be used in any of the test cases.
 function sumTwoSmallestNums(arr) {
-  throw new Error('Not implemented');
-}
+  let posArr = arr.filter(n => n > 0).sort((a, b) => a - b).slice(0,2);
+  let newArr = posArr[0] + posArr[1]
+  return newArr 
+  }
 
 // Create a function that takes a number and returns an array with the digits of the number in reverse order.
 // Examples
