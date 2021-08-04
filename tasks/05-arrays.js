@@ -37,8 +37,6 @@ function zipIt(womenArr, menArr) {
 }
 }
 
-
-
 // Create a function that takes an array of items, removes all duplicate items and returns a new
 //  array in the same sequential order as the old array (minus duplicates).
 // Examples
@@ -59,7 +57,9 @@ function removeDups(arr) {
 // Notes
 //  For a bonus challenge, try to find a solution without recursion.
 function measureDepth(arr) {
-  throw new Error('Not implemented');
+  return 1 + (arr instanceof Array ? arr.reduce(function(max, item) {
+    return measureDepth(item);
+  }, 0) : -1);
 }
 
 // Create a function that takes an array of numbers and returns the sum of the two lowest positive numbers.
@@ -82,9 +82,9 @@ function sumTwoSmallestNums(arr) {
 //  reverseArr(623478) ➞ [8, 7, 4, 3, 2, 6]
 //  reverseArr(12345) ➞ [5, 4, 3, 2, 1]
 function reverseArr(number) {
-  throw new Error('Not implemented');
+  let arr = Array.from(String(number), Number);
+  return arr.reverse()
 }
-
 // Create a function that takes an array and returns the sum of all items in the array.
 // Examples
 //  sumArray([1, 2, 3]) ➞ 6
@@ -95,7 +95,12 @@ function reverseArr(number) {
 // Notes
 //  The item in an array can be another array.
 function sumArray(arr) {
-  throw new Error('Not implemented');
+  let totalSum = 0;
+  let newArray = arr.flat(Infinity)
+  for (let i = 0; i <  newArray.length; ++i) {
+   totalSum +=  newArray[i];
+  }
+return totalSum;
 }
 
 // Create a function that returns only strings with unique characters.
