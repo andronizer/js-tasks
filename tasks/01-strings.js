@@ -13,7 +13,8 @@
 //  If you get a number with .0 on the end, return the integer value (e.g. return "4" rather than "4.0").
 //  If the number is 0, 0.0, 000, 00.00, etc... return "0".
 function removeLeadingTrailing(n) {
-  throw new Error('Not implemented');
+  const answer = parseFloat(n).toString();
+  return answer;
 }
 
 // Create a function that will remove the letters "a", "b" and "c" from the given string and return the modified version. If the given string does not contain "a", "b", or "c", return null.
@@ -26,7 +27,8 @@ function removeLeadingTrailing(n) {
 // Notes
 //  If the given string does not contain "a", "b", or "c", return null.
 function removeABC(str) {
-  throw new Error('Not implemented');
+  const res = str.split(/a|b|c/g).join("")
+  return str.length === res.length ? null : res; 
 }
 
 // Given a string of numbers separated by a comma and space, return the product of the numbers.
@@ -40,7 +42,7 @@ function removeABC(str) {
 // Notes
 //  Bonus: Try to complete this challenge in one line!
 function multiplyNums(nums) {
-  throw new Error('Not implemented');
+  return nums.split(',').reduce((a,b) => a*b , )  
 }
 
 // Create a function to determine if the sum of all the individual even digits are greater than the sum of all the indiviudal odd digits in a string of numbers.
@@ -56,9 +58,35 @@ function multiplyNums(nums) {
 // Notes
 //  The input will be a string of numbers.
 function evenOrOdd(str) {
-  throw new Error('Not implemented');
-}
+  let even = [];
+  let odd = [];
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] % 2 === 0) {
+      even.push(str[i]);
+    } else {
+      odd.push(str[i]);
+    }
+  }
 
+  let sum1 = 0;
+  let sum2 = 0;
+
+  for (let i = 0; i < even.length; i++) {
+    sum1 += Number(even[i]);
+  }
+
+  for (let i = 0; i < odd.length; i++) {
+    sum2 += Number(odd[i]);
+  }
+
+  if (sum1 > sum2) {
+    return "Even is greater than Odd";
+  } else if (sum1 < sum2) {
+    return "Odd is greater than Even";
+  } else if (sum1 === sum2) {
+    return "Even and Odd are the same";
+  }
+}
 // Write a function that takes an integer i and returns an integer with the integer backwards followed by the original integer.
 //
 //  To illustrate:
@@ -73,8 +101,10 @@ function evenOrOdd(str) {
 // Notes
 // i is a non-negative integer.
 function reverseAndNot(i) {
-  throw new Error('Not implemented');
+  const str = '' + i;
+  return str.split('').reverse().join('') + str;
 }
+
 
 // Create a function that takes a string, checks if it has the same number of x's and o's and returns either true or false.
 // Return a boolean value (true or false).
@@ -95,7 +125,31 @@ function reverseAndNot(i) {
 //  Remember to return true if there aren't any x's or o's.
 //  Must be case insensitive.
 function XO(str) {
-  throw new Error('Not implemented');
+  let x = [];
+  let o = [];
+  let arr1 = str.toLowerCase();
+  arr1.split('');
+  for (let i=0; i < arr1.length; i++) {
+    if (arr1[i].includes("x"))
+  {
+    x.push(arr1[i])
+  	
+  }
+}
+let arr2 = str.split('');
+for (let i=0; i < arr2.length; i++) {
+  if (arr2[i].includes("o"))
+{
+  o.push(arr2[i])
+ 
+}
+}
+if (x.length == o.length) {
+  return true
+}
+if (x.length > o.length || x.length < o.length) {
+  return false
+}
 }
 
 // Create a function that takes a string as an argument and converts the first character of each word to uppercase. Return the newly formatted string.
@@ -110,7 +164,11 @@ function XO(str) {
 //  You can expect a valid string for each test case.
 //  Some words may contain more than one uppercase letter (see example #4).
 function makeTitle(str) {
-  throw new Error('Not implemented');
+  const arr = str.split(/\s+/)
+    .map(word => word[0]
+    .toUpperCase() + word.substring(1))
+    .join(' ')
+  return arr;
 }
 
 // Double Letters
@@ -122,7 +180,12 @@ function makeTitle(str) {
 //  doubleLetters("orange") ➞ false
 //  doubleLetters("munchkin") ➞ false
 function doubleLetters(word) {
-  throw new Error('Not implemented');
+  for(let i = 0; i <= word.length; i++) {
+    if(word[i] === word[i-1]) {
+      return true;
+          } 
+}
+return false;
 }
 
 // Given two strings comprised of + and -, return a new string which shows how the two strings interact in the following way:
@@ -137,7 +200,14 @@ function doubleLetters(word) {
 // Notes
 // The two strings will be the same length.
 function neutralise(s1, s2) {
-  throw new Error('Not implemented');
+  let arr = [];
+  for (let i = 0; i < s1.length; i++) {
+    if (s1[i] == s2[i]) {
+      arr.push(s1[i])
+    } else { 
+      arr.push(0)
+    }
+  } return arr.join('');
 }
 
 // Create a function that takes a string str and modifies the given string as per the below examples:
@@ -147,7 +217,17 @@ function neutralise(s1, s2) {
 //  mumbling("maTT") ➞ "M-Aa-Ttt-Tttt"
 //  mumbling("EdaBit") ➞ "E-Dd-Aaa-Bbbb-Iiiii-Tttttt"
 function mumbling(str) {
-  throw new Error('Not implemented');
+  const strArr = str.split('');
+  const newArr = strArr.map((letter, index) => {
+    const str = letter.repeat(index + 1).toLowerCase();
+    const formatedFirstLetter = str.charAt(0).toUpperCase() + str.slice(1);
+    if (index !== strArr.length - 1) {
+      return formatedFirstLetter + '-';
+    } else {
+      return formatedFirstLetter;
+    }
+  });
+  return newArr.join('');
 }
 
 module.exports = {
