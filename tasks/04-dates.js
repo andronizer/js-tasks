@@ -205,7 +205,7 @@ function dayOfYear(date) {
   const startDate = new Date(ourDate.getFullYear(), 0, 0);
   const difference =  ourDate - startDate;
   const day = 1000 * 60 * 60 * 24;
-  const result = Math.floor(difference / day);
+  const result = Math.ceil(difference / day);
   return result
 }
 
