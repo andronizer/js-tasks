@@ -11,7 +11,7 @@
 // flatten([[true, false], [false, false]]) ➞ []
 //   Expected: [true, false, false, false]
 function flatten(arr) {
-  throw new Error('Not implemented');
+  return arr.flat();
 }
 
 // Given an array of women and an array of men, either:
