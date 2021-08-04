@@ -103,7 +103,9 @@ function doubleFactorial(num) {
 // Notes
 //  The input will always be a valid integer (number).
 
-countOnes = (i) => i.toString(2).split("0").join("").length;
+function countOnes(i) {  
+ return i.toString(2).split("0").join("").length
+}
 
 // Create a function that takes an integer n and reverses it.
 //
@@ -153,7 +155,11 @@ function oneOddOneEven(n) {
 //  All numbers used in the tests will be integers (whole numbers).
 //  Returning a function from a function is a key part of understanding higher order functions (functions which operate on and return functions).
 
-var add = (n) => (m) => n + m;
+function add(n) {
+  return function(m) {
+    return n + m
+  }
+}
 
 // Given two integers a and b, return how many times a can be halved while still being greater than b.
 //
@@ -170,7 +176,7 @@ function halveCount(a, b) {
   while (halvedInt > b) {
     halvedInt = halvedInt / 2;
     i++;
-    if (halvedInt < b) {
+    if (halvedInt <= b) {
       return i - 1;
     }
   }
