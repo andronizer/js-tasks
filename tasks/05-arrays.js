@@ -87,6 +87,7 @@ function reverseArr(number) {
   let arr = Array.from(String(number), Number);
   return arr.reverse()
 }
+
 // Create a function that takes an array and returns the sum of all items in the array.
 // Examples
 //  sumArray([1, 2, 3]) ➞ 6
@@ -112,7 +113,15 @@ return totalSum;
 //  filterUnique(["88", "999", "989", "9988", "9898"]) ➞ []
 //  filterUnique(["ABCDE", "DDEB", "BED", "CCA", "BAC"]) ➞ ["ABCDE", "BED", "BAC"]
 function filterUnique(arr) {
-  throw new Error('Not implemented');
+  let array = [];
+  arr.forEach(el => {
+    let setFromElem = new Set(el.split(''))
+   if (el.length === setFromElem.size) {
+    array.push(el)
+   }
+  }
+  )
+  return array
 }
 
 // Write a function that takes three arguments (x, y, z)
@@ -124,8 +133,10 @@ function filterUnique(arr) {
 // Notes
 //  The first two arguments will always be integers.
 //  The third argument is either a string or an integer.
-function matrix(x, y, z) {
-  throw new Error('Not implemented');
+function matrix(x, y, z) { 
+  const newArray = new Array(y).fill(z)
+  const result = new Array(x).fill(newArray)
+  return result;
 }
 
 // Write a function that returns all the elements in an array that are strictly greater than their adjacent left and right neighbors.
@@ -135,7 +146,7 @@ function matrix(x, y, z) {
 //  miniPeaks([1, 2, 1, 1, 3, 2, 5, 4, 4]) ➞ [2, 3, 5]
 //  miniPeaks([1, 2, 3, 4, 5, 6]) ➞ []
 function miniPeaks(arr) {
-  throw new Error('Not implemented');
+  return arr.filter((elem,i) => arr[i-1] < arr[i] && arr[i] > arr[i+1])
 }
 
 module.exports = {
