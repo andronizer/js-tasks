@@ -9,7 +9,7 @@
 // Notes
 //  Don't forget about leap years!
 function days(month, year) {
-  throw new Error('Not implemented');
+  return new Date(year, month, 0).getDate()
 }
 
 // Given the month and year as numbers, return whether that month contains a Friday 13th.
@@ -22,7 +22,8 @@ function days(month, year) {
 // Notes
 //  January will be given as 1, February as 2, etc ...
 function hasFriday13(month, year) {
-  throw new Error('Not implemented');
+  const date = new Date(year, month -1, 13);
+  return date.getDay() === 5  
 }
 
 // Create a function that converts dates from one of five string formats:
@@ -43,8 +44,13 @@ function hasFriday13(month, year) {
 // Notes
 //  You can solve this any number of ways, but using JavaScript's new Date() method is probably the easiest. Check the Resources tab for documentation.
 function convertDate(date) {
-  throw new Error('Not implemented');
-}
+  const mainDate = new Date(date)
+  const month = mainDate.getMonth()
+  const day = mainDate.getDate()
+  const year = mainDate.getFullYear()
+  const result = [month + 1, day, year]
+  return result
+ }
 
 // The 2nd of February 2020 is a palindromic date in both dd/mm/yyyy and mm/dd/yyyy format (02/02/2020). Given a date in dd/mm/yyyy format, return true if the date is palindromic in both date formats, otherwise return false.
 //
@@ -59,7 +65,12 @@ function convertDate(date) {
 //  All dates will be valid in both date formats.
 //  The date must be palindromic in both dd/mm/yyyy and mm/dd/yyyy formats to pass.
 function palindromicDate(date) {
-  throw new Error('Not implemented');
+  const data = date.split('/').join('')
+  const revData = data.split('').reverse().join('');
+  const palReverse = date.split('/')
+  const revArr = [palReverse[1], palReverse[0], palReverse[2]].join('').split('').reverse().join('');
+
+  return data === revData && data === revArr
 }
 
 // Given a date, return how many days date is away from 2021 (end date not included). date will be in mm/dd/yyyy format.
@@ -72,7 +83,14 @@ function palindromicDate(date) {
 // Notes
 //  All given dates will be in the year 2020.
 function daysUntil2021(date) {
-  throw new Error('Not implemented');
+  const today = new Date(date)
+  const twentyOne = new Date("01/01/2021")
+  const daySec = 24*60*60*1000;
+  const daysLeft = Math.round((twentyOne.getTime() - today.getTime())/daySec);
+  if ( daysLeft === 1) {
+   return daysLeft + ' day'
+ } 
+ return daysLeft + ' days'
 }
 
 // Given a Date() object, return the date from three days prior as a string: "2016-01-19".
@@ -87,7 +105,17 @@ function daysUntil2021(date) {
 //  JavaScript months are zero based.
 //  Your output should NOT be zero based: 2016, 0, 19 == "2016-01-19".
 function threeDaysAgo(date) {
-  throw new Error('Not implemented');
+  const start = new Date(date);
+  start.setDate(start.getDate() - 3);
+  const month = start.getMonth() +1
+  const day = start.getDate()
+  const year = start.getFullYear()
+ 
+const correctDay = day < 10 ?  `0${day}` : day
+const correctMonth = month < 10 ? `0${month}` : month
+
+const result = [year,correctMonth, correctDay].join('-');
+  return result
 }
 
 // Create a function that takes a date object and return string in the following format:
@@ -104,7 +132,8 @@ function threeDaysAgo(date) {
 //  Try not to rely on default Date.toString() output in your impelementation.
 //  Be aware that the Date's month field is zero based (0 is January and 11 is December).
 function formatDate(date) {
-  throw new Error('Not implemented');
+  const today = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds())).toISOString().replace(/[^0-9]/g, "").slice(0, -3) 
+  return today
 }
 
 // Create a function which takes in a date as a string, and returns the date a week after.
@@ -119,8 +148,16 @@ function formatDate(date) {
 //  Single digit numbers should be zero padded.
 //  See Resources for some helpful tutorials on JavaScript dates.
 function weekAfter(d) {
-  throw new Error('Not implemented');
-}
+  const reversedDate = d.split('/').reverse().join('/')
+  const today = new Date(reversedDate),
+        hoursInOneDay = 24,
+        minutesInOneHour = 60,
+        secondsInOneHours = 60,
+        miliseconds = 1000
+  const sevenDaysinMiliseconds = 7 * hoursInOneDay * minutesInOneHour * secondsInOneHours * miliseconds
+  const nextWeek = new Date(today.getTime() + sevenDaysinMiliseconds);
+  return nextWeek.toLocaleDateString('en-GB')
+ }
 
 // Create a function that converts 12-hour time to 24-hour time or vice versa. Return the output as a string.
 //
@@ -133,11 +170,25 @@ function weekAfter(d) {
 // Notes
 //  A 12-hour time input will be denoted with an am or pm suffix.
 //  A 24-hour input time contains no suffix.
-function convertTime(time) {
-  throw new Error('Not implemented');
+function convertTime(time)  {
+  if (time.includes('am') || time.includes('pm')) {
+      const [ourTime, modifier] = time.split(' ');
+      let [hours, minutes] = ourTime.split(':');
+       if (hours === '12') {
+          hours = '0';
+        }      
+        if (modifier === 'pm') {
+          hours = Number(hours) + 12;
+        }      
+        return `${hours}:${minutes}`;
+      } else {
+       const [time12] = time.split(' ');
+       const [hours12, minutes12] = time12.split(':');
+       return Number(hours12) > 12 ?  `${hours12 % 12}:${minutes12} pm` :  `${hours12}:${minutes12} am`;
+      }
 }
 
-// Each year has 365 or 366 days. Given a string date representing a Gregorian calendar date formatted as month/day/year, return the day-number of the year.
+// Each year has 365 or 3Буд66 days. Given a string date representing a Gregorian calendar date formatted as month/day/year, return the day-number of the year.
 //
 // Examples
 //  dayOfYear("12/13/2020") ➞ 348
@@ -150,7 +201,12 @@ function convertTime(time) {
 // Notes
 //  All input strings in the tests are valid dates.
 function dayOfYear(date) {
-  throw new Error('Not implemented');
+  const ourDate = new Date(date);
+  const startDate = new Date(ourDate.getFullYear(), 0, 0);
+  const difference =  ourDate - startDate;
+  const day = 1000 * 60 * 60 * 24;
+  const result = Math.ceil(difference / day);
+  return result
 }
 
 module.exports = {
