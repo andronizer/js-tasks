@@ -11,7 +11,7 @@
 // flatten([[true, false], [false, false]]) ➞ []
 //   Expected: [true, false, false, false]
 function flatten(arr) {
-  throw new Error('Not implemented');
+  return arr.flat();
 }
 
 // Given an array of women and an array of men, either:
@@ -27,7 +27,14 @@ function flatten(arr) {
 //  zipIt(["Ana", "Amy", "Lisa"], ["Bob", "Josh", "Tim"])
 //    ➞ [["Ana", "Bob"], ["Amy", "Josh"],["Lisa", "Tim"]]
 function zipIt(womenArr, menArr) {
-  throw new Error('Not implemented');
+  let newArr = []
+  if (womenArr.length === menArr.length) {
+  newArr = womenArr.map((e, i) => [e, menArr[i]])
+  return newArr 
+ } 
+ else {
+    return "sizes don't match"
+}
 }
 
 // Create a function that takes an array of items, removes all duplicate items and returns a new
@@ -37,7 +44,7 @@ function zipIt(womenArr, menArr) {
 //  removeDups(["The", "big", "cat"]) ➞ ["The", "big", "cat"]
 //  removeDups(["John", "Taylor", "John"]) ➞ ["John", "Taylor"]
 function removeDups(arr) {
-  throw new Error('Not implemented');
+  return arr.filter((value, index) => arr.indexOf(value) == index);
 }
 
 // Given an array containing an array containing an array containing... an array containing nothing.
@@ -50,7 +57,9 @@ function removeDups(arr) {
 // Notes
 //  For a bonus challenge, try to find a solution without recursion.
 function measureDepth(arr) {
-  throw new Error('Not implemented');
+  return 1 + (arr instanceof Array ? arr.reduce(function(max, item) {
+    return measureDepth(item);
+  }, 0) : -1);
 }
 
 // Create a function that takes an array of numbers and returns the sum of the two lowest positive numbers.
@@ -64,8 +73,10 @@ function measureDepth(arr) {
 //  Don't count negative numbers.
 //  Floats and empty arrays will not be used in any of the test cases.
 function sumTwoSmallestNums(arr) {
-  throw new Error('Not implemented');
-}
+  let posArr = arr.filter(n => n > 0).sort((a, b) => a - b).slice(0,2);
+  let newArr = posArr[0] + posArr[1]
+  return newArr 
+  }
 
 // Create a function that takes a number and returns an array with the digits of the number in reverse order.
 // Examples
@@ -73,7 +84,8 @@ function sumTwoSmallestNums(arr) {
 //  reverseArr(623478) ➞ [8, 7, 4, 3, 2, 6]
 //  reverseArr(12345) ➞ [5, 4, 3, 2, 1]
 function reverseArr(number) {
-  throw new Error('Not implemented');
+  let arr = Array.from(String(number), Number);
+  return arr.reverse()
 }
 
 // Create a function that takes an array and returns the sum of all items in the array.
@@ -86,7 +98,12 @@ function reverseArr(number) {
 // Notes
 //  The item in an array can be another array.
 function sumArray(arr) {
-  throw new Error('Not implemented');
+  let totalSum = 0;
+  let newArray = arr.flat(Infinity)
+  for (let i = 0; i <  newArray.length; ++i) {
+   totalSum +=  newArray[i];
+  }
+return totalSum;
 }
 
 // Create a function that returns only strings with unique characters.
@@ -96,7 +113,15 @@ function sumArray(arr) {
 //  filterUnique(["88", "999", "989", "9988", "9898"]) ➞ []
 //  filterUnique(["ABCDE", "DDEB", "BED", "CCA", "BAC"]) ➞ ["ABCDE", "BED", "BAC"]
 function filterUnique(arr) {
-  throw new Error('Not implemented');
+  let array = [];
+  arr.forEach(el => {
+    let setFromElem = new Set(el.split(''))
+   if (el.length === setFromElem.size) {
+    array.push(el)
+   }
+  }
+  )
+  return array
 }
 
 // Write a function that takes three arguments (x, y, z)
@@ -108,8 +133,10 @@ function filterUnique(arr) {
 // Notes
 //  The first two arguments will always be integers.
 //  The third argument is either a string or an integer.
-function matrix(x, y, z) {
-  throw new Error('Not implemented');
+function matrix(x, y, z) { 
+  const newArray = new Array(y).fill(z)
+  const result = new Array(x).fill(newArray)
+  return result;
 }
 
 // Write a function that returns all the elements in an array that are strictly greater than their adjacent left and right neighbors.
@@ -119,7 +146,7 @@ function matrix(x, y, z) {
 //  miniPeaks([1, 2, 1, 1, 3, 2, 5, 4, 4]) ➞ [2, 3, 5]
 //  miniPeaks([1, 2, 3, 4, 5, 6]) ➞ []
 function miniPeaks(arr) {
-  throw new Error('Not implemented');
+  return arr.filter((elem,i) => arr[i-1] < arr[i] && arr[i] > arr[i+1])
 }
 
 module.exports = {
