@@ -7,7 +7,8 @@
 // Notes
 //  Return an empty array if the object is empty.
 function toArray(obj) {
-  throw new Error('Not implemented');
+  const entries = Object.entries(obj) 
+  return entries
 }
 
 // Create the function that takes an array with objects and returns the sum of people's budgets.
@@ -24,7 +25,8 @@ function toArray(obj) {
 //   { name: "Martin",  age: 16, budget: 1600 }
 // ]) ➞ 62600
 function getBudgets(arr) {
-  throw new Error('Not implemented');
+  const sum = arr.map(money => money.budget).reduce((moreMoney, money) => money + moreMoney);
+  return sum
 }
 
 // Create a function to check whether the given parameter is an Object or not.
@@ -38,7 +40,11 @@ function getBudgets(arr) {
 // Notes
 //  Inputs may be null, primitive wrapper types, dates.
 function isObject(value) {
-  throw new Error('Not implemented');
+  if (typeof value === 'object' && value !== null) {
+    return true 
+  } else {
+    return false
+  }
 }
 
 // Create a function that takes a string of name and checks how much good is the given name. A preloaded dictionary of alphabet scores is available in the Code tab. Add up the letters of your name to get the total score.
@@ -64,9 +70,29 @@ const scores = {'A': 100, 'B': 14, 'C': 9, 'D': 28, 'E': 145, 'F': 12, 'G': 3,
   'N': 450, 'O': 80, 'P': 2, 'Q': 12, 'R': 400, 'S': 113, 'T': 405,
   'U': 11, 'V': 10, 'W': 10, 'X': 3, 'Y': 210, 'Z': 23};
 
-function nameScore(name) {
-  throw new Error('Not implemented');
-}
+  function nameScore(name) {     
+    let fullName = name.replace(/\s/g, '');  
+    let array = fullName.split('').map(item => scores[item])
+    let score = array.reduce((a, b) => a + b)
+    
+  switch(true) {
+  case (score <= 60):
+   return "NOT TOO GOOD"
+    break;
+
+  case (61 <= score && score <= 300):
+   return "PRETTY GOOD"
+    break;
+
+case (301 <= score && score <= 599):
+   return "VERY GOOD"
+    break;
+
+case (score >= 600):
+   return "THE BEST"
+   break;
+  }
+  }
 
 // Given an object of people and their ages, return how old the people would be after n years have passed. Use the absolute value of n.
 //
@@ -111,12 +137,14 @@ function nameScore(name) {
 //  Assume that everyone is immortal (it would be a bit grim if I told you to remove names once they reached 75).
 //  n should be a positive number because last time I checked, people don't tend to age backwards. Therefore, use the absolute value of n.
 function afterNYears(names, n) {
-  throw new Error('Not implemented');
+  const newObj = Object.fromEntries(Object.entries(names).map(([key, value]) => [key, value + Math.abs(n)]))
+  return newObj;
 }
+
 //
 // Create a function that checks to see if two object arguments are equal to one another. Return true if the objects are equal, otherwise, return false.
 function isEqual(objOne, objTwo) {
-  throw new Error('Not implemented');
+  return JSON.stringify(objOne) === JSON.stringify(objTwo);
 }
 
 // Write a function that inverts the keys and values of an object.
@@ -131,7 +159,10 @@ function isEqual(objOne, objTwo) {
 //  invert({ "zebra": "koala", "horse": "camel" })
 //  ➞ { "koala": "zebra", "camel": "horse" }
 function invert(o) {
-  throw new Error('Not implemented');
+  return Object.entries(o).reduce((acc, [value,key]) => {
+    acc[key] = value;
+    return acc;
+}, {})
 }
 
 // You go to a jewelry shop and try to find the most expensive piece of jewelry. You write down the name of each piece of jewelry and its price.
@@ -154,7 +185,15 @@ function invert(o) {
 //  There will always be at least one item in the object.
 //  There will always be only one highest priced item (i.e. there will not be two items with the joint highest value).
 function mostExpensive(obj) {
-  throw new Error('Not implemented');
+  let maxPrice = 0;
+  let mostExpensiveJewelry;
+  for(let i in obj) {
+    if (maxPrice <= obj[i]) {
+      maxPrice = obj[i]
+      mostExpensiveJewelry = i
+    } 
+   }
+  return `The most expensive one is the ${mostExpensiveJewelry}`
 }
 
 // Write a function that transforms an array of characters into an array of objects, where:
